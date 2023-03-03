@@ -41,7 +41,7 @@ class ActionButtonConfirmWidget extends StatelessWidget {
                         child: Padding(
                           padding:  EdgeInsets.symmetric(horizontal: 40,
                               vertical: 10),
-                          child: Text("Please Note ", style: TextStyle
+                          child: Text("Please Note", style: TextStyle
                             (fontWeight: FontWeight.bold,
                             fontSize: 20,
                             fontFamily: "SFprotext/SF-Pro-Text-Regular",),),
