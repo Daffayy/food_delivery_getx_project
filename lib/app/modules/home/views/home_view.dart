@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_getx_project/app/routes/app_pages.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_delivery_getx_project/app/modules/empty_screen_view/empty_history/views/empty_history_view.dart';
+
 import 'package:get/get.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
+import 'package:skeletons/skeletons.dart';
 
-import '../../search/widgets/food_card_search_widget.dart';
+
 import '../../widget/color_theme_widget/color_theme_widget.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/food_card_widget.dart';
 
 
 class HomeView extends GetView<HomeController> {
+  final HomeController homeController = Get.put(HomeController());
   bool isOpened = false;
 
   final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
@@ -178,56 +180,53 @@ class HomeView extends GetView<HomeController> {
                       ),
                       Expanded(
                           child: TabBarView(clipBehavior: Clip.none, children: [
-                        ListView(
-                          scrollDirection: Axis.horizontal,
-                          children:  [
-                            GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(Routes.DETAIL_FOOD_SCREEN);
-                                },
-                              child: FoodCardWidget(
+                            Obx(
+                                  () => Container(
+                                child: homeController.isLoading.value ==
+                                    true
+                                    ? SkeletonListView()
+                                    : homeController.listMeal.isEmpty
+                                    ? SizedBox()
+                                    : ListView(
+                                  scrollDirection:
+                                  Axis.horizontal,
+                                  children: [
+                                    ...homeController.listMeal
+                                        .map(
+                                          (item) => Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 20),
+                                        child: FoodCardWidget(
+                                            imageUrl:
+                                            item.strMealThumb,
+                                            text: item.strMeal),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                        Container(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const [
+                              FoodCardWidget(
                                   image: "assets/img/food1.png",
-                                  text: "Veggie\ntomato mix"),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Veggie\ntomato mix"),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Veggie\ntomato mix"),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Veggie\ntomato mix"),
-                          ],
-                        ),
-                        ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: const [
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Bubur ayam"),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Bubur ayam"),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FoodCardWidget(
-                                image: "assets/img/food1.png",
-                                text: "Bubur ayam"),
-                          ],
+                                  text: "Bubur ayam"),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              FoodCardWidget(
+                                  image: "assets/img/food1.png",
+                                  text: "Bubur ayam"),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              FoodCardWidget(
+                                  image: "assets/img/food1.png",
+                                  text: "Bubur ayam"),
+                            ],
+                          ),
                         ),
                         ListView(
                           scrollDirection: Axis.horizontal,
