@@ -6,7 +6,7 @@ class DetailFoodScreenBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<DetailFoodScreenController>(
-      () => DetailFoodScreenController(),
+          () => DetailFoodScreenController(),
     );
   }
 }

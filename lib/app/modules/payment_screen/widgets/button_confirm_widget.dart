@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../../routes/app_pages.dart';
 
 
 class ActionButtonConfirmWidget extends StatelessWidget {
@@ -130,7 +134,7 @@ class ActionButtonConfirmWidget extends StatelessWidget {
                           TextButton(
                             onPressed: (){
                               print("Confirm cancel press");
-                              Navigator.of(context).pop();
+                              Get.back();
                             },
                             child: Padding(
                               padding:  EdgeInsets.symmetric(horizontal: 30),
@@ -150,7 +154,7 @@ class ActionButtonConfirmWidget extends StatelessWidget {
                           TextButton(
                             onPressed: (){
                               print("Confirm proceed press");
-                              Navigator.of(context).pop();
+                              Get.offNamed(Routes.HOME);
                             },
                             child: Padding(
                               padding:  EdgeInsets.symmetric(horizontal: 50),

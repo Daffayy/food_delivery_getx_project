@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../detail_food_screen/views/detail_food_screen_view.dart';
 
 class FoodCardWidget extends StatelessWidget {
   const FoodCardWidget({
     Key? key,
     this.image = '',
-    this.imageUrl = '',
     required this.text,
+    this.imageUrl = '',
+    this.id = '',
   }) : super(key: key);
-  final String image, imageUrl, text;
+  final String image, text, imageUrl, id;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => DetailFoodScreenView());
+        Get.toNamed(Routes.DETAIL_FOOD_SCREEN, arguments: {'id' : id});
+        print(id);
       },
       child: SizedBox(
         height: 300,
@@ -38,11 +41,30 @@ class FoodCardWidget extends StatelessWidget {
                         blurRadius: 40)
                   ],
                 ),
-                child: Center(
-                  child: Text(
-                    text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: Text(
+                          "N1,900",
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
