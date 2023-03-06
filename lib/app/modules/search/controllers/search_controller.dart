@@ -17,14 +17,14 @@ class SearchControllerPage extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getSearchProduct();
+    // getSearchProduct();
   }
 
   getSearchProduct() async {
     isLoading(true);
     try {
       SearchMealsModel responseSearch =
-          await mealSearchService.getSearchMeals();
+      await mealSearchService.getSearchMeals();
       searchMealItem.addAll(responseSearch.meals);
       isLoading(false);
     } catch (e) {

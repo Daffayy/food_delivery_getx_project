@@ -21,3 +21,5 @@ class CartController extends GetxController {
 
   void increment() => count.value++;
 }
+
+

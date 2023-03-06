@@ -7,7 +7,7 @@ import '../controllers/search_controller.dart';
 import '../widgets/food_card_search_widget.dart';
 
 class SearchView extends GetView<SearchControllerPage> {
-  final SearchControllerPage controller = Get.put(SearchControllerPage());
+  // final SearchControllerPage controller = Get.put(SearchControllerPage());
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,7 @@ class SearchView extends GetView<SearchControllerPage> {
         title: Container(
           padding: const EdgeInsets.all(8),
           child: TextFormField(
+            onFieldSubmitted: (value) => controller.getSearchProduct(),
             decoration:
             const InputDecoration(border: InputBorder.none, hintText: ""),
           ),
@@ -111,9 +112,9 @@ class SearchView extends GetView<SearchControllerPage> {
                           right: 20,
                         ),
                         child: FoodCard(
-                          imageUrl: item.strMealThumb,
-                          title: item.strMeal,
-                          idSearch: item.idMeal
+                            imageUrl: item.strMealThumb!,
+                            title: item.strMeal!,
+                            idSearch: item.idMeal!,
                         ),
                       ),
                   ),
@@ -126,4 +127,3 @@ class SearchView extends GetView<SearchControllerPage> {
     );
   }
 }
-
